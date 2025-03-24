@@ -68,7 +68,7 @@ export async function POST(request: Request) {
 
     // Attempt to parse the AI's response as JSON
     let parsedMealPlan: { [day: string]: DailyMealPlan };
-    console.log(aiContent);
+    
     try {
       parsedMealPlan = JSON.parse(aiContent);
     } catch (parseError) {

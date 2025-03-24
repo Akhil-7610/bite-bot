@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
       }
       // Add more event types as needed
       default:
-        console.log(`Unhandled event type ${event.type}`);
+        
     }
   } catch (error) {
     console.error('Error processing webhook:', error);
@@ -58,7 +58,7 @@ const handleCheckoutSessionCompleted = async (
   session: Stripe.Checkout.Session
 ) => {
   const userId = session.metadata?.clerkUserId;
-  console.log("Handling checkout.session.completed for user:", userId);
+  
 
   if (!userId) {
     console.error("No userId found in session metadata.");
@@ -86,7 +86,7 @@ const handleCheckoutSessionCompleted = async (
         subscriptionTier: session.metadata?.planType || null,
       },
     });
-    console.log(`Subscription activated for user: ${userId}`, updatedProfile);
+   
   } catch (error: any) {
     console.error("Prisma Update Error:", error.message);
   }
@@ -95,10 +95,7 @@ const handleCheckoutSessionCompleted = async (
 // Handler for failed invoice payments
 const handleInvoicePaymentFailed = async (invoice: Stripe.Invoice) => {
   const subscriptionId = invoice.subscription as string;
-  console.log(
-    "Handling invoice.payment_failed for subscription:",
-    subscriptionId
-  );
+  
 
   if (!subscriptionId) {
     console.error("No subscription ID found in invoice.");
@@ -132,7 +129,7 @@ const handleInvoicePaymentFailed = async (invoice: Stripe.Invoice) => {
         subscriptionActive: false,
       },
     });
-    console.log(`Subscription payment failed for user: ${userId}`);
+    
   } catch (error: any) {
     console.error("Prisma Update Error:", error.message);
   }
@@ -141,10 +138,7 @@ const handleInvoicePaymentFailed = async (invoice: Stripe.Invoice) => {
 // Handler for subscription deletions (e.g., cancellations)
 const handleSubscriptionDeleted = async (subscription: Stripe.Subscription) => {
   const subscriptionId = subscription.id;
-  console.log(
-    "Handling customer.subscription.deleted for subscription:",
-    subscriptionId
-  );
+  
 
   // Retrieve userId from subscription ID
   let userId: string | undefined;
@@ -174,7 +168,7 @@ const handleSubscriptionDeleted = async (subscription: Stripe.Subscription) => {
         stripeSubscriptionId: null,
       },
     });
-    console.log(`Subscription canceled for user: ${userId}`);
+    
   } catch (error: any) {
     console.error("Prisma Update Error:", error.message);
   }

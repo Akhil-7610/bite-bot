@@ -17,7 +17,6 @@ export async function GET() {
       where: { userId: clerkUser.id },
     });
 
-    console.log("Profile data for subscription status:", profile);
 
     // If no profile found, return null
     if (!profile) {
@@ -38,7 +37,6 @@ export async function GET() {
           
           // Update the profile object to reflect the change
           profile.subscriptionActive = true;
-          console.log("Updated subscription status to active");
         }
       } catch (stripeError) {
         console.error("Error verifying subscription with Stripe:", stripeError);

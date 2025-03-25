@@ -30,10 +30,12 @@ export default function ProfilePage() {
         throw new Error(errorData.error || "Failed to fetch subscription.");
       }
       return res.json();
+      console.log(window.location.href)
     },
     enabled: isLoaded && isSignedIn,
     staleTime: 5 * 60 * 1000, // 5 minutes
   });
+  console.log(window.location.href)
 
   // Adjusted Matching Logic Using subscription tier
   const currentPlan = availablePlans.find(
